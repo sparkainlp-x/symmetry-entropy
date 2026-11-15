@@ -1,0 +1,20 @@
+"""Symmetry entropy: what a projection can resolve, what it must store,
+and what it is blind to.
+
+SYNTHETIC classical emulation only. No claim about physical reality.
+No headline claim is emitted (see unified.unified_claim()).
+
+Import the functions from their modules, e.g.::
+
+    from symmetry_entropy.orbit import orbit, orbit_entropy
+    from symmetry_entropy.projection_entropy import projection_entropy
+    from symmetry_entropy.asymmetry import asymmetry_cost
+    from symmetry_entropy.self_determinism import self_determinism_factor
+    from symmetry_entropy.unified import unified_claim
+"""
+
+from . import asymmetry, orbit, projection_entropy, self_determinism, unified
+
+__version__ = "0.1.0"
+
+__all__ = ["asymmetry", "orbit", "projection_entropy", "self_determinism", "unified"]

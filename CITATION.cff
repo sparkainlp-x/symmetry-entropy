@@ -1,0 +1,38 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it using the metadata from this file."
+title: "Symmetry Entropy: orbit entropy, projection entropy, and asymmetry cost (SYNTHETIC classical emulation)"
+type: software
+authors:
+  - family-names: "Brisson"
+    given-names: "Jean-François"
+    orcid: "https://orcid.org/0009-0000-9778-5374"
+    affiliation: "Spark AI NLP, Fredericton, New Brunswick, Canada"
+version: 0.1.0
+date-released: "2026-11-15"
+license: AGPL-3.0-only
+repository-code: "https://github.com/sparkainlp-x/symmetry-entropy"
+abstract: >-
+  SYNTHETIC. Standard-library Python plus NumPy: symmetry entropy
+  measures what a projection can resolve, what it must store, and what
+  it is blind to. Orbit entropy log2(|orbit|) under D4 on 4x4 patterns
+  (asymmetric 3 bits, blocks 1 bit, ring and cross 0 bits); projection
+  entropy, the Shannon entropy of the Born weights after projecting onto
+  a stored subspace (0 bits clean, 0.618 bits at sigma 0.25, 1.270 bits
+  at sigma 0.75, 1.581 bits Haar-random); asymmetry cost S(twirl) - S(rho)
+  under Pauli {I, X} (|0> 1 bit, |+> 0 bits); self-determinism factor
+  D = <psi|P|psi> (1 for a clean stored probe, 0 for a kernel probe,
+  strictly between for noisy and random probes). Four falsifiable claims,
+  all measured. No headline claim is emitted. No speedup, no Bell
+  violation, no hardware data, no claim about physical reality.
+keywords:
+  - "symmetry-entropy"
+  - "orbit-entropy"
+  - "projection-entropy"
+  - "asymmetry-cost"
+  - "von-neumann-entropy"
+  - "twirl"
+  - "dihedral-group"
+  - "holographic-memory"
+  - "born-rule"
+  - "synthetic"
+  - "python"

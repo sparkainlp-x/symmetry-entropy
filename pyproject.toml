@@ -1,0 +1,19 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "symmetry-entropy"
+version = "0.1.0"
+description = "Symmetry entropy: orbit entropy, projection entropy, and asymmetry cost (stdlib + NumPy, synthetic only)"
+readme = "README.md"
+requires-python = ">=3.10"
+license = {text = "AGPL-3.0-only"}
+authors = [{name = "Jean-François Brisson"}]
+dependencies = ["numpy>=1.24"]
+
+[project.scripts]
+symmetry-entropy = "symmetry_entropy.unified:_cli"
+
+[tool.setuptools.packages.find]
+where = ["src"]
