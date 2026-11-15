@@ -8,7 +8,7 @@ seeds, pytest, no headline claim emitted.
 
 ## What it is
 
-Four measured quantities, one per module:
+Five measured quantity families, one per module:
 
 1. **Orbit entropy** (`orbit.py`) — `log2(|orbit|)` under the dihedral
    group D4 on 4x4 ±1 patterns. Asymmetric patterns: 3 bits. blocks:
@@ -30,8 +30,19 @@ Four measured quantities, one per module:
    of the Born weights: it says how much the system can see at all,
    and the projection entropy says how uncertain the answer is given
    what it can see.
+5. **Honeycomb / bee-hexagon** (`honeycomb.py`) — D6 orbit entropy
+   on 6-tuples (fully asymmetric hexagonal pattern: 3.585 bits;
+   honeycomb cell: 0 bits); the honeycomb lattice (a patch of 7
+   hexagons is bipartite, 24 vertices, 30 edges, two triangular
+   sublattices 12/12) and Hales efficiency (hexagon perimeter 3.7224
+   < square 4.0000 < triangle 4.5590 for unit area); the Shipman
+   projection (a 6D flag manifold projects to a 2D hexagon, with an
+   alpha-parameter curve family changing topology at alpha =
+   1/sqrt(3) = 0.5774); and the radical-pair compass toy (singlet
+   yield depends on field strength and direction: 0.3763 along z vs
+   0.2524 along x at 50 uT).
 
-`unified.py` runs four falsifiable statements and returns measured
+`unified.py` runs eight falsifiable statements and returns measured
 numbers with a pass/fail for each:
 
 - **(a)** Distinguishability is bounded by orbit entropy: in
@@ -46,14 +57,26 @@ numbers with a pass/fail for each:
   D = 0 for a kernel probe, strictly between for noisy and random
   probes; the classical analogue holds in closed-orbit and base-only
   mode.
+- **(e)** D6 orbit entropy bounds distinguishability: a fully
+  asymmetric hexagonal pattern has 12 distinct recalls = orbit size
+  12 (3.585 bits); the honeycomb cell has 1 = 1 (0.000 bits).
+- **(f)** Honeycomb optimality: the hexagon has the least perimeter
+  for unit area AND the honeycomb patch is bipartite (two triangular
+  sublattices A and B).
+- **(g)** Quantum compass: the radical-pair singlet yield is
+  magnetic-field-dependent — strength AND direction (0.3763 along z
+  vs 0.2524 along x at 50 uT).
+- **(h)** Shipman alpha transition: the curve family changes topology
+  at alpha = 1/sqrt(3) = 0.5774 (arms reach the hexagon vertices at
+  theta = 60 degrees).
 
-All four pass. See `REPORT.md` for the measured tables.
+All eight pass. See `REPORT.md` for the measured tables.
 
 ## Install and run
 
 ```sh
 pip install -e .
-python -m pytest tests/          # 46 tests
+python -m pytest tests/          # 64 tests
 symmetry-entropy                 # prints the unified claim as JSON
 ```
 
@@ -70,6 +93,10 @@ symmetry-entropy                 # prints the unified claim as JSON
 - No speedup, no Bell violation, no hardware data.
 - No headline claim is emitted: `headline_allowed` is always False.
 - Results apply only to the recorded seeds, patterns, and noise levels.
+- Shipman is a documented correlation with an unproven mechanism:
+  the module measures the projection geometry, not the bee's brain.
+  The radical-pair model is a one-nucleus toy, not a measurement of
+  a real bee's cryptochrome.
 
 ## Licence and credits
 

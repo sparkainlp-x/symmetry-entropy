@@ -10,11 +10,12 @@ Import the functions from their modules, e.g.::
     from symmetry_entropy.projection_entropy import projection_entropy
     from symmetry_entropy.asymmetry import asymmetry_cost
     from symmetry_entropy.self_determinism import self_determinism_factor
+    from symmetry_entropy.honeycomb import d6_orbit_entropy, rpm_anisotropic_yield
     from symmetry_entropy.unified import unified_claim
 """
 
-from . import asymmetry, orbit, projection_entropy, self_determinism, unified
+from . import asymmetry, honeycomb, orbit, projection_entropy, self_determinism, unified
 
 __version__ = "0.1.0"
 
-__all__ = ["asymmetry", "orbit", "projection_entropy", "self_determinism", "unified"]
+__all__ = ["asymmetry", "honeycomb", "orbit", "projection_entropy", "self_determinism", "unified"]

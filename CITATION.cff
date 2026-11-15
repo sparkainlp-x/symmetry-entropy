@@ -21,9 +21,16 @@ abstract: >-
   at sigma 0.75, 1.581 bits Haar-random); asymmetry cost S(twirl) - S(rho)
   under Pauli {I, X} (|0> 1 bit, |+> 0 bits); self-determinism factor
   D = <psi|P|psi> (1 for a clean stored probe, 0 for a kernel probe,
-  strictly between for noisy and random probes). Four falsifiable claims,
-  all measured. No headline claim is emitted. No speedup, no Bell
-  violation, no hardware data, no claim about physical reality.
+  strictly between for noisy and random probes); honeycomb / bee-hexagon
+  extension (D6 orbit entropy: asymmetric hexagonal pattern 3.585 bits,
+  honeycomb cell 0 bits; honeycomb patch bipartite, 24 vertices, 30 edges;
+  Hales: hexagon perimeter 3.7224 < square 4.0000 < triangle 4.5590;
+  Shipman alpha transition at 1/sqrt(3) = 0.5774; radical-pair compass
+  toy: 0.3763 along z vs 0.2524 along x at 50 uT). Eight falsifiable
+  claims, all measured. No headline claim is emitted. No speedup, no Bell
+  violation, no hardware data, no claim about physical reality. Shipman
+  is a documented correlation with an unproven mechanism; the radical-pair
+  model is a one-nucleus toy, not a real bee's cryptochrome.
 keywords:
   - "symmetry-entropy"
   - "orbit-entropy"
@@ -34,5 +41,9 @@ keywords:
   - "dihedral-group"
   - "holographic-memory"
   - "born-rule"
+  - "honeycomb"
+  - "hexagon"
+  - "shipman"
+  - "radical-pair"
   - "synthetic"
   - "python"

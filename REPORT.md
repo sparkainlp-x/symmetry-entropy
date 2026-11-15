@@ -3,9 +3,9 @@
 ## Summary
 
 Symmetry entropy measures what a projection can resolve, what it must
-store, and what it is blind to. Four quantities, four falsifiable
-claims, all measured on the real vendored code. No headline claim is
-emitted (`headline_allowed` is always False).
+store, and what it is blind to. Five measured quantity families,
+eight falsifiable claims, all measured on the real vendored code. No
+headline claim is emitted (`headline_allowed` is always False).
 
 ## 1. Orbit entropy (D4 on 4x4 ±1 patterns)
 
@@ -129,7 +129,113 @@ squared. The missing 0.75 is exactly the orbit information base-only
 mode never stored -- the same lack behind the 12/28 equivariance
 failure in §1.
 
-## 5. The four claims (measured)
+## 5. Honeycomb / bee-hexagon extension (new)
+
+The D4 symmetry of §1 extends to the hexagon (D6, 12 operations),
+and the hexagonal geometry connects to three documented facts:
+Hales' honeycomb conjecture, Shipman's flag-manifold correlation
+with the honeybee waggle dance, and the radical-pair mechanism of
+bee magnetoreception.
+
+### 5a. D6 orbit entropy (6-tuples on a hexagonal ring)
+
+`d6_orbit_entropy(pattern) = log2(|orbit|)` under D6.
+
+| pattern | orbit size | orbit entropy (bits) | distinct recalls (closed-orbit) |
+|---|---|---|---|
+| asymmetric (1,1,−1,1,−1,−1) | 12 | 3.585 | 12 |
+| alternating (1,−1,1,−1,1,−1) | 2 | 1.000 | 2 |
+| honeycomb cell (all +1) | 1 | 0.000 | 1 |
+| one −1 | 6 | 2.585 | 6 |
+| two adjacent −1 | 6 | 2.585 | 6 |
+| two opposite −1 | 3 | 1.585 | 3 |
+
+A fully asymmetric hexagonal pattern has 3.585 bits -- larger than
+D4's 3.000 bits, because the hexagon has more symmetry to break (12
+operations vs 8). The honeycomb cell has orbit 1 (0.000 bits), like
+the D4 ring: fully symmetric, nothing to distinguish.
+
+### 5b. Honeycomb lattice and Hales efficiency
+
+A honeycomb patch (one central hexagon plus its 6 neighbours) is a
+bipartite graph: **24 vertices, 30 edges, split 12/12 between two
+triangular sublattices A and B** -- the same bipartite structure as
+graphene (two interpenetrating triangular sublattices, whose symmetry
+protects the Dirac cones).
+
+For unit area, the regular hexagon has the least perimeter of the
+three regular tilings (Hales, 1999):
+
+| tile | perimeter (unit area) |
+|---|---|
+| hexagon | 3.7224 |
+| square | 4.0000 |
+| equilateral triangle | 4.5590 |
+
+3.7224 < 4.0000 < 4.5590. The bee minimises wax; the quantum
+material's honeycomb symmetry protects its Dirac points. Same shape,
+same reason (optimisation), different physics.
+
+### 5c. Shipman projection (geometry only)
+
+Barbara Shipman (University of Rochester) found that the
+6-dimensional flag manifold -- a quantum geometry used for quarks --
+projects to a 2-dimensional HEXAGON, and that curves in the flag
+manifold, projected onto that hexagon, reproduce the honeybee waggle
+dance. A variable alpha reproduces the whole dance. The curve family
+changes topology at **alpha = 1/sqrt(3) = 0.5774** (theta = 60
+degrees, the arms reach the hexagon vertices):
+
+| alpha | theta (deg) | arms |
+|---|---|---|
+| 2.000 | 26.57 | inside (hit the edges) |
+| 1.000 | 45.00 | inside (hit the edges) |
+| 0.5774 | 60.00 | AT the vertices (endpoint distance 1.000) |
+| 0.400 | 68.20 | passed the vertex direction |
+| 0.200 | 78.69 | passed the vertex direction |
+
+HONEST FRAMING: Shipman's correlation is DOCUMENTED (Discover,
+November 1997, Adam Frank) but the mechanism is UNPROVEN -- no
+follow-up papers in 20 years, no other academics continued it, one
+entomologist called it "ridiculous". What is measured here is the
+PROJECTION GEOMETRY (a 6D object projecting to a 2D hexagon, and an
+alpha-parameter curve family with a topology transition), NOT the
+bee's brain. This module does NOT claim bees see 6D space, and it
+does NOT claim the dance IS a quantum projection.
+
+### 5d. Radical-pair mechanism (bee magnetoreception toy)
+
+Two electron spins + one nuclear spin, H = gamma*(B.S1 + B.S2) +
+(Ax*S1x*Ix + Ay*S1y*Iy + Az*S1z*Iz), gamma = 1.76085963e11 rad/s/T,
+k = 1.0e6 /s, electron singlet with maximally mixed nucleus, exact
+diagonalisation. Singlet yield Phi_S:
+
+| case | field | yield |
+|---|---|---|
+| isotropic (Ax=Ay=Az=1 mT) | B = 0 | 0.6250 |
+| isotropic | B = 25 uT | 0.4179 |
+| isotropic | B = 50 uT | 0.3876 |
+| isotropic | B = 100 uT | 0.3795 |
+| anisotropic (Ax=Ay=0.5 mT, Az=2 mT) | B = 0 | 0.3750 |
+| anisotropic | B = 50 uT along z | 0.3763 |
+| anisotropic | B = 50 uT along x | 0.2524 |
+| anisotropic | B = 50 uT at 45 deg (x+z) | 0.3135 |
+
+The isotropic yield depends on field STRENGTH but NOT on direction
+(B along z and along x both give 0.3876 at 50 uT) -- that is its
+honest limitation, and why the anisotropic version exists. The
+anisotropic yield depends on DIRECTION: **0.3763 along z vs 0.2524
+along x at 50 uT, a contrast of 0.1239** -- that direction
+dependence IS the compass signal, the leading mechanism for bee
+magnetoreception (cryptochrome).
+
+HONEST FRAMING: this is a TOY model (one nucleus, simplified
+hyperfine). It demonstrates the compass PRINCIPLE; it is NOT a
+measurement of a real bee's cryptochrome, which has many nuclei and
+a complex environment. Experimental context: Oesterle et al. 2026
+(two-photon imaging of the bee anterior optic tubercle).
+
+## 6. The eight claims (measured)
 
 **(a) Distinguishability is bounded by orbit entropy — PASS.**
 In closed-orbit mode, distinct recalls equal orbit size for every
@@ -158,9 +264,29 @@ Haar seed 7: 0.910; seed 42: 0.193; mean over 200 seeds 0.720).
 Classical: D = 1 for every stored transform in closed-orbit mode;
 D = 0.25 for a transformed probe in base-only mode.
 
-Overall: **4/4 claims pass. `headline_allowed` is False.**
+**(e) D6 orbit entropy bounds distinguishability — PASS.**
+Fully asymmetric hexagonal pattern: 12 distinct recalls = orbit
+size 12 (3.585 bits). Honeycomb cell: 1 = 1 (0.000 bits).
+Alternating: 2 = 2. One −1: 6 = 6. Two opposite −1: 3 = 3.
 
-## 6. Honest limits
+**(f) Honeycomb optimality — PASS.** Hexagon has the least
+perimeter for unit area (3.7224 < 4.0000 < 4.5590) AND the
+honeycomb patch is bipartite (24 vertices, 30 edges, two triangular
+sublattices A and B, 12/12).
+
+**(g) Quantum compass — PASS.** The radical-pair singlet yield is
+magnetic-field-dependent: strength (isotropic: 0.6250 at 0 uT ->
+0.3876 at 50 uT) AND direction (anisotropic: 0.3763 along z vs
+0.2524 along x at 50 uT, contrast 0.1239).
+
+**(h) Shipman alpha transition — PASS.** The curve family changes
+topology at alpha = 1/sqrt(3) = 0.5774 (arms reach the hexagon
+vertices at theta = 60 degrees); above it the arms stay inside,
+below it they have passed the vertex direction.
+
+Overall: **8/8 claims pass. `headline_allowed` is False.**
+
+## 7. Honest limits
 
 1. **Classical emulation only, no claim about physical reality.**
    This package is synthetic classical code. It cannot prove anything
@@ -189,8 +315,16 @@ Overall: **4/4 claims pass. `headline_allowed` is False.**
    system's own structure determines versus how much comes from
    outside it. It does not measure consciousness, free will, or
    anything about physical reality.
+6. **Shipman is a documented correlation with an unproven mechanism,
+   and the RPM here is a toy.** The Shipman section measures the
+   PROJECTION GEOMETRY (a 6D object projecting to a 2D hexagon, and
+   an alpha-parameter curve family with a topology transition), not
+   the bee's brain; it does not claim bees see 6D space or that the
+   dance is a quantum projection. The RPM section is a one-nucleus
+   toy with simplified hyperfine; it demonstrates the compass
+   principle, not a measurement of a real bee's cryptochrome.
 
-## 7. What would count as proof (the bar, not met here)
+## 8. What would count as proof (the bar, not met here)
 
 A falsifiable prediction that separates projection from the
 alternatives, tested on a physical system — for example: a maximum

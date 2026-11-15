@@ -1,6 +1,6 @@
-"""Unified claim: four falsifiable statements, measured, no headline.
+"""Unified claim: eight falsifiable statements, measured, no headline.
 
-This module runs the four claims and returns measured numbers with a
+This module runs the eight claims and returns measured numbers with a
 pass/fail for each. It emits no headline claim: headline_allowed is
 always False, exactly like symmetry-quantum-flip-membrane's
 full_science.py.
@@ -30,6 +30,20 @@ full_science.py.
     mode, while a transformed probe in base-only mode has D < 1 --
     the missing part is exactly the orbit information base-only mode
     never stored.
+(e) D6 orbit entropy: distinguishability is bounded by D6 orbit
+    entropy -- a fully asymmetric hexagonal pattern has 12 distinct
+    recalls = orbit size 12 (3.585 bits); the honeycomb cell has 1
+    = 1 (0.000 bits).
+(f) Honeycomb optimality: the hexagon has the least perimeter for
+    unit area (3.7224 < 4.0000 < 4.5590) AND the honeycomb patch is
+    bipartite (two triangular sublattices A and B).
+(g) Quantum compass: the radical-pair singlet yield is
+    magnetic-field-dependent -- strength (isotropic: 0.6250 at 0 uT
+    -> 0.3876 at 50 uT) AND direction (anisotropic: 0.3763 along z
+    vs 0.2524 along x at 50 uT).
+(h) Shipman alpha transition: the curve family changes topology at
+    alpha = 1/sqrt(3) = 0.5774 (arms reach the hexagon vertices at
+    theta = 60 degrees).
 
 These are measurements on synthetic classical code. They are not a
 proof about physical reality; see REPORT.md, "Honest limits".
@@ -73,6 +87,24 @@ from .projection_entropy import (
 from .self_determinism import (
     classical_self_determinism,
     self_determinism_factor,
+)
+from .honeycomb import (
+    D6_ALTERNATING,
+    D6_ASYMMETRIC,
+    D6_HONEYCOMB_CELL,
+    D6_ONE_MINUS,
+    D6_TWO_OPPOSITE_MINUS,
+    HexMembrane,
+    d6_closed_orbit_patterns,
+    d6_distinct_recalls,
+    d6_orbit,
+    d6_orbit_entropy,
+    honeycomb_patch_bipartite,
+    rpm_anisotropic_yield,
+    rpm_isotropic_yield,
+    shipman_arms_at_vertices,
+    shipman_transition_alpha,
+    tile_perimeter,
 )
 
 HEADLINE_NOTE = (
@@ -123,7 +155,7 @@ def _quantum_gap(psi, unitaries):
 
 
 def unified_claim():
-    """Run the four falsifiable statements; return measured numbers."""
+    """Run the eight falsifiable statements; return measured numbers."""
     tol = 1e-9
     result = {"version": "0.1.0", "headline_allowed": False,
               "headline_note": HEADLINE_NOTE}
@@ -229,8 +261,101 @@ def unified_claim():
         claim_d["pass"] = claim_d["pass"] and ok
     result["claim_d"] = claim_d
 
+    # --- (e) D6 orbit entropy bounds distinguishability ---
+    claim_e = {"patterns": {}, "pass": True}
+    for name, pat, expected_size in (
+            ("asymmetric", D6_ASYMMETRIC, 12),
+            ("alternating", D6_ALTERNATING, 2),
+            ("honeycomb cell", D6_HONEYCOMB_CELL, 1),
+            ("one -1", D6_ONE_MINUS, 6),
+            ("two opposite -1", D6_TWO_OPPOSITE_MINUS, 3)):
+        hex_mem = HexMembrane(d6_closed_orbit_patterns(pat, "hex"))
+        o_size = len(d6_orbit(pat))
+        o_ent = d6_orbit_entropy(pat)
+        d_rec = d6_distinct_recalls(hex_mem, pat)
+        ok = (o_size == expected_size and d_rec == o_size)
+        claim_e["patterns"][name] = {
+            "orbit_size": o_size,
+            "orbit_entropy": o_ent,
+            "distinct_recalls": d_rec,
+            "pass": ok,
+        }
+        claim_e["pass"] = claim_e["pass"] and ok
+    result["claim_e"] = claim_e
+
+    # --- (f) Honeycomb optimality: least perimeter + bipartite patch ---
+    patch = honeycomb_patch_bipartite()
+    per_hex = tile_perimeter("hexagon")
+    per_sq = tile_perimeter("square")
+    per_tri = tile_perimeter("triangle")
+    claim_f = {
+        "perimeter_hexagon": per_hex,
+        "perimeter_square": per_sq,
+        "perimeter_triangle": per_tri,
+        "least_perimeter_is_hexagon": bool(per_hex < per_sq < per_tri),
+        "patch_bipartite": bool(patch["bipartite"]),
+        "patch_n_vertices": patch["n_vertices"],
+        "patch_n_edges": patch["n_edges"],
+        "sublattice_A_size": len(patch["A"]),
+        "sublattice_B_size": len(patch["B"]),
+        "pass": bool(per_hex < per_sq < per_tri and patch["bipartite"]
+                     and len(patch["A"]) == 12 and len(patch["B"]) == 12),
+    }
+    result["claim_f"] = claim_f
+
+    # --- (g) Quantum compass: RPM yield depends on field strength AND direction ---
+    claim_g = {"isotropic": {}, "anisotropic": {}, "pass": True}
+    iso_cases = [
+        ("B=0 uT", 0.0, 0.6250),
+        ("B=25 uT", 25e-6, 0.4179),
+        ("B=50 uT", 50e-6, 0.3876),
+        ("B=100 uT", 100e-6, 0.3795),
+    ]
+    for label, b, expected in iso_cases:
+        y = rpm_isotropic_yield(b)
+        ok = abs(y - expected) < 1e-3
+        claim_g["isotropic"][label] = {"yield": y, "expected": expected, "pass": ok}
+        claim_g["pass"] = claim_g["pass"] and ok
+    aniso_cases = [
+        ("B=0", (0.0, 0.0, 0.0), 0.3750),
+        ("B=50 uT along z", (0.0, 0.0, 50e-6), 0.3763),
+        ("B=50 uT along x", (50e-6, 0.0, 0.0), 0.2524),
+        ("B=50 uT at 45 deg", (50e-6 / math.sqrt(2.0), 0.0, 50e-6 / math.sqrt(2.0)), 0.3135),
+    ]
+    for label, b_vec, expected in aniso_cases:
+        y = rpm_anisotropic_yield(b_vec)
+        ok = abs(y - expected) < 1e-3
+        claim_g["anisotropic"][label] = {"yield": y, "expected": expected, "pass": ok}
+        claim_g["pass"] = claim_g["pass"] and ok
+    # The direction contrast itself is the compass signal.
+    y_z = claim_g["anisotropic"]["B=50 uT along z"]["yield"]
+    y_x = claim_g["anisotropic"]["B=50 uT along x"]["yield"]
+    claim_g["direction_contrast_z_minus_x"] = y_z - y_x
+    claim_g["pass"] = claim_g["pass"] and (y_z - y_x > 0.1)
+    result["claim_g"] = claim_g
+
+    # --- (h) Shipman alpha transition at 1/sqrt(3) ---
+    trans = shipman_transition_alpha()
+    claim_h = {
+        "transition_alpha": trans,
+        "expected": 1.0 / math.sqrt(3.0),
+        "arms_inside_above_transition": bool(
+            not shipman_arms_at_vertices(2.0)
+            and not shipman_arms_at_vertices(1.0)),
+        "arms_at_vertices_at_transition": bool(
+            shipman_arms_at_vertices(trans)),
+        "arms_at_vertices_below_transition": bool(
+            shipman_arms_at_vertices(0.4)),
+        "pass": bool(abs(trans - 1.0 / math.sqrt(3.0)) < tol
+                     and not shipman_arms_at_vertices(1.0)
+                     and shipman_arms_at_vertices(trans)
+                     and shipman_arms_at_vertices(0.4)),
+    }
+    result["claim_h"] = claim_h
+
     result["overall_pass"] = bool(
-        claim_a["pass"] and claim_b["pass"] and claim_c["pass"] and claim_d["pass"])
+        claim_a["pass"] and claim_b["pass"] and claim_c["pass"] and claim_d["pass"]
+        and claim_e["pass"] and claim_f["pass"] and claim_g["pass"] and claim_h["pass"])
     return result
 
 
