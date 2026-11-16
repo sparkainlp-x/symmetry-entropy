@@ -100,7 +100,7 @@ symmetry-entropy                 # prints the unified claim as JSON
 
 ## Licence and credits
 
-AGPL-3.0-only. Project author: Jean-François Brisson only.
+Copyright (c) 2026 Jean-Francois Brisson (Spark AI NLP). AGPL-3.0-only. Project author: Jean-François Brisson only.
 
 Provenance: the D4 symmetry and classical membrane code is vendored
 from symmetry-quantum-flip-membrane (Brisson; Mun Seok Lee is

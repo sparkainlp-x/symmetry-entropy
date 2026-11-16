@@ -1,3 +1,6 @@
+# SPDX-License-Identifier: AGPL-3.0-only
+# Copyright (c) 2026 Jean-Francois Brisson (Spark AI NLP)
+
 """Tests for the unified claim (symmetry_entropy.unified).
 
 The three falsifiable statements, with their measured numbers:

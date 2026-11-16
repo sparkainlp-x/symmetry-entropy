@@ -1,3 +1,6 @@
+# SPDX-License-Identifier: AGPL-3.0-only
+# Copyright (c) 2026 Jean-Francois Brisson (Spark AI NLP)
+
 """Self-determinism factor: how much of a projection the system determines itself.
 
 New in this package (upgrade, v0.1.0). This is the fourth quantity,

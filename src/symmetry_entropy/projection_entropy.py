@@ -1,3 +1,6 @@
+# SPDX-License-Identifier: AGPL-3.0-only
+# Copyright (c) 2026 Jean-Francois Brisson (Spark AI NLP)
+
 """Projection entropy: what a projection knows, and what it is blind to.
 
 Vendored from sparkainlp-x/quantum-projection v0.1.0

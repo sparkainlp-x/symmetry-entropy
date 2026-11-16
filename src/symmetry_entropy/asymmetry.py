@@ -1,3 +1,6 @@
+# SPDX-License-Identifier: AGPL-3.0-only
+# Copyright (c) 2026 Jean-Francois Brisson (Spark AI NLP)
+
 """Asymmetry cost: the entropy a projection onto the symmetric part adds.
 
 New in this package (NumPy only). No vendored code here.

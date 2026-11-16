@@ -1,3 +1,6 @@
+# SPDX-License-Identifier: AGPL-3.0-only
+# Copyright (c) 2026 Jean-Francois Brisson (Spark AI NLP)
+
 """Unified claim: eight falsifiable statements, measured, no headline.
 
 This module runs the eight claims and returns measured numbers with a

@@ -1,3 +1,6 @@
+# SPDX-License-Identifier: AGPL-3.0-only
+# Copyright (c) 2026 Jean-Francois Brisson (Spark AI NLP)
+
 """Orbit entropy: what a symmetry can and cannot resolve.
 
 Vendored from sparkainlp-x/symmetry-quantum-flip-membrane v0.1.0
